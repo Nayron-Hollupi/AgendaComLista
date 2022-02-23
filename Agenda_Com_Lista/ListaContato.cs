@@ -21,69 +21,55 @@ namespace Agenda_Com_Lista
 
         public void push(Contato aux)
         {
+            if (vazia())
             {
+                Head = Tail = aux;
+            }
+            //Quando um objeto entra pelo TAIL
+            else if (aux.Nome.CompareTo(Tail.Nome) == 1 || aux.Nome.CompareTo(Tail.Nome) == 0)
+            {
+                Tail.Proximo = aux;
+                Tail = aux;
+            }
+            // Quando um objeto entra pelo HEAD
+            else if (aux.Nome.CompareTo(Head.Nome) == -1 || aux.Nome.CompareTo(Head.Nome) == 0)
+            {
+                aux.Proximo = Head;
+                Head = aux;
             }
             else
             {
-                if (HEAD == TAIL)
+                Contato aux1 = Head;
+                Contato aux2 = Head;
+                aux1 = aux1.Proximo;
+                do
                 {
-                    //Quando um objeto entra pelo TAIL
+                    //Adiciona numero igual ordenado
+                    if (aux.Nome.CompareTo(aux1.Nome) == 0)
                     {
+                        //mover
+                        aux2 = aux1;
+                        aux1 = aux1.Proximo;
+                        // encadear
+                        aux2.Proximo = aux;
+                        aux.Proximo = aux1;
+                        break;
                     }
-                    // Quando um objeto entra pelo HEAD
+                    //Adiciona no meio
+                    else if (aux.Nome.CompareTo(aux2.Nome) == 1 && aux.Nome.CompareTo(aux1.Nome) == -1)
                     {
+                        aux2.Proximo = aux;
+                        aux.Proximo = aux1;
+                        break;
                     }
-                }
-                else
-                {
-                    do
-                    {
-                        {
-                            aux.Proximo = HEAD;
-                            HEAD = aux;
-                            aux1 = null;
-                        } //Adiciona numero igual ordenado
-                        else if (aux.Nome.CompareTo(aux1.Nome) == 0)
-                        {
-                            //mover  
-                            aux2 = aux1;
-                            aux1 = aux1.Proximo;
-                            // encadear
-                            aux2.Proximo = aux;
-                            aux.Proximo = aux1;
-                        }
-
-                        //Adiciona no meio 
-                        else if (aux.Nome.CompareTo(aux2.Nome) == 1 && aux.Nome.CompareTo(aux1.Nome) == -1)
-                        {
-                            aux2.Proximo = aux;
-                            aux.Proximo = aux1;
-                        }
-
-                        //Final
-                        else if (aux1 == TAIL && (aux.Nome.CompareTo(aux1.Nome) == 1 || aux.Nome.CompareTo(aux1.Nome) == 0))
-                        {
-                            TAIL.Proximo = aux;
-                            TAIL = aux;
-                            aux1 = null;
-
-                        }// continua
-                        else if (aux.Nome.CompareTo(aux1.Nome) == 1 && aux.Nome.CompareTo(aux2.Nome) == 1)
-                        {
-                            aux2 = aux1;
-                            aux1 = aux1.Proximo;
-                        }
-                    } while (aux1 != null);
-                }
-
-
+                    aux2 = aux1;
+                    aux1 = aux1.Proximo;
+                } while (aux1 != null);
             }
-            Console.WriteLine("\n-------Contato Cadastrado com Sucesso----------\n");
         }
 
 
-
-        public void pop(string nome)
+            public void pop(string nome)
         {
             if (vazia())
             {
