@@ -10,19 +10,19 @@ namespace Agenda_Com_Lista
     {
         public string Nome { get; set; }
         public string Email { get; set; }
-        public ListaTelefone Telefones { get; set; }
+        public ListaTelefone Telefone { get; set; }
         public Contato Proximo { get; set; }
 
-        public Contato(string nome, string email, ListaTelefone telefones)
+        public Contato(string nome, string email, ListaTelefone telefone)
         {
             Nome = nome;
             Email = email;
-            Telefones = telefones;
+            Telefone = telefone;
             Proximo = null;
         }
         public override string ToString()
         {
-            return "\n Nome: " + Nome + "\n Email: " + Email + " ";
+            return "\n Nome: " + Nome + "\n Email: " + Email + " " + Telefone.ToString();
         }
     }
 }
