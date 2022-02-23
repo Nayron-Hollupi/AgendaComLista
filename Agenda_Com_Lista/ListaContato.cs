@@ -5,19 +5,14 @@ namespace Agenda_Com_Lista
     internal class ListaContato
     {
 
-        public Contato Head { get; set; }
-        public Contato Tail { get; set; }
 
 
         public ListaContato()
         {
-            Head = null;
-            Tail = null;
         }
 
         public bool vazia()
         {
-            if (Head == null && Tail == null)
                 return true;
             else
                 return false;
@@ -26,54 +21,69 @@ namespace Agenda_Com_Lista
 
         public void push(Contato aux)
         {
-            if (vazia())
             {
-                Head = Tail = aux;
-            }
-            //Quando um objeto entra pelo TAIL
-            else if (aux.Nome.CompareTo(Tail.Nome) == 1 || aux.Nome.CompareTo(Tail.Nome) == 0)
-            {
-                Tail.Proximo = aux;
-                Tail = aux;
-            }
-            // Quando um objeto entra pelo HEAD
-            else if (aux.Nome.CompareTo(Head.Nome) == -1 || aux.Nome.CompareTo(Head.Nome) == 0)
-            {
-                aux.Proximo = Head;
-                Head = aux;
             }
             else
             {
-                Contato aux1 = Head;
-                Contato aux2 = Head;
-                aux1 = aux1.Proximo;
-                do
+                if (HEAD == TAIL)
                 {
-                    //Adiciona numero igual ordenado
-                    if (aux.Nome.CompareTo(aux1.Nome) == 0)
+                    //Quando um objeto entra pelo TAIL
                     {
-                        //mover
-                        aux2 = aux1;
-                        aux1 = aux1.Proximo;
-                        // encadear
-                        aux2.Proximo = aux;
-                        aux.Proximo = aux1;
-                        break;
                     }
-                    //Adiciona no meio
-                    else if (aux.Nome.CompareTo(aux2.Nome) == 1 && aux.Nome.CompareTo(aux1.Nome) == -1)
+                    // Quando um objeto entra pelo HEAD
                     {
-                        aux2.Proximo = aux;
-                        aux.Proximo = aux1;
-                        break;
                     }
-                    aux2 = aux1;
-                    aux1 = aux1.Proximo;
-                } while (aux1 != null);
+                }
+                else
+                {
+                    do
+                    {
+                        {
+                            aux.Proximo = HEAD;
+                            HEAD = aux;
+                            aux1 = null;
+                        } //Adiciona numero igual ordenado
+                        else if (aux.Nome.CompareTo(aux1.Nome) == 0)
+                        {
+                            //mover  
+                            aux2 = aux1;
+                            aux1 = aux1.Proximo;
+                            // encadear
+                            aux2.Proximo = aux;
+                            aux.Proximo = aux1;
+                        }
+
+                        //Adiciona no meio 
+                        else if (aux.Nome.CompareTo(aux2.Nome) == 1 && aux.Nome.CompareTo(aux1.Nome) == -1)
+                        {
+                            aux2.Proximo = aux;
+                            aux.Proximo = aux1;
+                        }
+
+                        //Final
+                        else if (aux1 == TAIL && (aux.Nome.CompareTo(aux1.Nome) == 1 || aux.Nome.CompareTo(aux1.Nome) == 0))
+                        {
+                            TAIL.Proximo = aux;
+                            TAIL = aux;
+                            aux1 = null;
+
+                        }// continua
+                        else if (aux.Nome.CompareTo(aux1.Nome) == 1 && aux.Nome.CompareTo(aux2.Nome) == 1)
+                        {
+                            aux2 = aux1;
+                            aux1 = aux1.Proximo;
+                        }
+                    } while (aux1 != null);
+                }
+
+
             }
+            Console.WriteLine("\n-------Contato Cadastrado com Sucesso----------\n");
         }
 
-            public void pop(string nome)
+
+
+        public void pop(string nome)
         {
             if (vazia())
             {
@@ -82,28 +92,18 @@ namespace Agenda_Com_Lista
             else
             {
                 bool erro = true;
-                Contato aux1 = Head;
-                Contato aux2 = Head;
                 do
                 {
                     if (aux1.Nome == nome)
                     {
 
-                        if (Head == Tail)
                         {
-                            Head = Tail = null;
 
                         }
-                        else if (aux1 == Head)
                         {
-                            Head = aux1.Proximo;
 
                         }
-                        else if (aux1 == Tail)
                         {
-                            aux2.Proximo = Tail;
-                            Tail = aux2;
-                            Tail.Proximo = null;
 
                         }
                         else if (aux2.Nome.CompareTo(nome) == -1)
@@ -140,13 +140,10 @@ namespace Agenda_Com_Lista
             else
             {
 
-                if (Head != null)
                 {
-                    Contato aux = Head;
                     do
                     {
                         Console.WriteLine(aux.ToString());
-                        Telefone telefone = aux.Telefone.Head;
                         do
                         {
                             Console.WriteLine(telefone.ToString());
@@ -183,14 +180,12 @@ namespace Agenda_Com_Lista
 
 
                 bool erro = true;
-                Contato aux = Head;
                 do
                 {
                     if (aux.Nome == nome)
                     {
 
                         Console.WriteLine(aux.ToString());
-                        Telefone aux_telefone = aux.Telefone.Head;
                         do
                         {
                             Console.WriteLine(aux_telefone.ToString());
@@ -224,14 +219,12 @@ namespace Agenda_Com_Lista
                 nome = nome.ToUpper();
 
                 bool erro = true;
-                Contato aux = Head;
                 do
                 {
                     if (aux.Nome == nome)
                     {
 
                         Console.WriteLine(aux.ToString());
-                        Telefone aux_telefone = aux.Telefone.Head;
                         do
                         {
                             Console.WriteLine(aux_telefone.ToString());
@@ -252,7 +245,6 @@ namespace Agenda_Com_Lista
                                 Console.Write("Digite o novo nome: ");
                                 nome = Console.ReadLine();
                                 nome = nome.ToUpper();
-                                push(new Contato(nome, aux.Email, aux.Telefone));
                                 pop(aux.Nome);
                                 break;
                             case "2":
@@ -270,7 +262,6 @@ namespace Agenda_Com_Lista
 
 
                                 Console.WriteLine(aux.ToString());
-                                aux_telefone = aux.Telefone.Head;
                                 do
                                 {
                                     if (aux_telefone.Tipo == tipo)
@@ -331,5 +322,6 @@ namespace Agenda_Com_Lista
         }
     }
 }
+
 
 

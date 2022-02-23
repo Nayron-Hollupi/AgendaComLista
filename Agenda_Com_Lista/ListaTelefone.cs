@@ -13,19 +13,16 @@ namespace Agenda_Com_Lista
 
         public ListaTelefone()
         {
-            Head = null;
             Tail = null;
         }
 
         public bool Vazia()
         {
-            return Head == null && Tail == null;
         }
         public void Push(Telefone aux)
         {
             if (Vazia())
             {
-                Head = aux;
                 Tail = aux;
             }
             else
@@ -36,13 +33,11 @@ namespace Agenda_Com_Lista
         }
         public void print()
         {
-            if (Vazia())
             {
                 Console.WriteLine("\n----------------Agenda vazia -----------------\n");
             }
             else
             {
-                Telefone aux = Head;
                 do
                 {
                     Console.WriteLine(aux.ToString());
