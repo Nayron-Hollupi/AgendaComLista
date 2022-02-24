@@ -83,14 +83,7 @@ namespace Agenda_Com_Lista
                     if (aux1.Nome == nome)
                     {
 
-                        {
-
-                        }
-                        {
-
-                        }
-                        {
-
+                      
                         }
                         else if (aux2.Nome.CompareTo(nome) == -1)
                         {
